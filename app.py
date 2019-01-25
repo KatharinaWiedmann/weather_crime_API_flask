@@ -5,7 +5,7 @@ Created on Mon Jan 21 09:27:16 2019
 @author: Katharina
 """
 from flask import Flask, render_template, request
-from weatherAPI_functions import *
+from program.weatherAPI_functions import *
 
 app = Flask(__name__)
 
