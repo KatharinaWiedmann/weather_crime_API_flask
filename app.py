@@ -24,9 +24,9 @@ def generate():
 @app.route("/confirmation", methods=['POST'])
 def confirmation():
     formdata = request.form
-    postcode = formdata['postcode']
+    form_postcode = formdata['postcode']
 #    result = 'If postcode is okay, this will show.'
-    postcode = finding_city(postcode)
+    postcode = finding_city(form_postcode)
     return render_template("confirmation.html", **locals())
 
 

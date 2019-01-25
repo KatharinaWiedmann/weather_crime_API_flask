@@ -34,7 +34,7 @@ def finding_city(postcode):
     results = [city, state, longitude, latitude]
     return results
 
-results = finding_city(postcode)
+#results = finding_city(postcode)
 
 print(results)
 #endpoint = "http://api.openweathermap.org/data/2.5/weather"
