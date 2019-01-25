@@ -5,7 +5,7 @@ Created on Fri Jan 25 10:42:31 2019
 @author: Katharina
 """
 import requests
-import program.config
+#import config
 #-------------------------------------------------------------------------#
 #1st API: GETTING CITY TO CORREPONDING POSTCODE 
 def finding_city(postcode):
