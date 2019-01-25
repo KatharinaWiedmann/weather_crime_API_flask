@@ -21,22 +21,25 @@ def finding_city(postcode):
 #    print(response.url)
     #print(data)
     
-    #Converting the Postcode into the city 
-    city = (data['result'][0]['admin_district'])
-    state = (data['result'][0]['region'])
+    results = []
+    if response.status_code == 200:
     
-    longitude = (data['result'][0]['longitude'])
-    latitude = (data['result'][0]['latitude'])
-    
-    
-    print("You'll get all important information on", city+ ",", state)
-    
-    results = [city, state, longitude, latitude]
+        #Converting the Postcode into the city 
+        city = (data['result'][0]['admin_district'])
+        state = (data['result'][0]['region'])
+        
+        longitude = (data['result'][0]['longitude'])
+        latitude = (data['result'][0]['latitude'])
+        
+        
+#        print("You'll get all important information on", city+ ",", state)
+        
+        results = [city, state, longitude, latitude]
     return results
 
 #results = finding_city(postcode)
 
-print(results)
+#print(results)
 #endpoint = "http://api.openweathermap.org/data/2.5/weather"
 #
 ##Doesn't work with city cause there are several cities with the same name in the world and by default it will take the largest city. 
