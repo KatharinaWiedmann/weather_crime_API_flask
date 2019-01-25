@@ -1,9 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1 class = "container">This is an extension to the layout html - you get it from the index html which is connected to the layout html. </h1>
-        <nav class="container">
-          <ul class="menu">
-            <li><a href="{{ url_for('generate') }}">Generate Info now!</a></li>
-          </ul>
-        </nav>
+        
+    <p class = "container"><a href="{{ url_for('generate') }}">Generate Info now!</a></p>
+          
 {% endblock %}

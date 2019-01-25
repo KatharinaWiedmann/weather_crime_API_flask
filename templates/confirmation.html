@@ -1,5 +1,13 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1 class = "container">Postcode: {{form_postcode}}</h1>
-    <h1 class = "container">Postcode: {{results[0]}}</h1> 
+    <p class = "container">Postcode: {{form_postcode}}</p>
+    <p class = "container">City: {{results[0]}}</p> 
+    <p class = "container">in: {{results[1]}}</p> 
+    <p class = "container">Longitude: {{results[2]}}</p> 
+    <p class = "container">Latitude: {{results[3]}}</p> 
+    <p class = "container">Temperature: {{results[4]}} C</p> 
+    <p class = "container">Weather: {{results[6]}}</p> 
+    <p class = "container">Recommendation: {{statement}}</p> 
+    <p class = "container">Crimes: {{crime_statement}}</p>  
+    <p class = "container"><a href="{{ url_for('generate') }}">Generate Info again!</a></p>
 {% endblock %}

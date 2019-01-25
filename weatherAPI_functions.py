@@ -5,7 +5,7 @@ Created on Fri Jan 25 10:42:31 2019
 @author: Katharina
 """
 import requests
-#import config
+import config
 #-------------------------------------------------------------------------#
 #1st API: GETTING CITY TO CORREPONDING POSTCODE 
 def finding_city(postcode):
@@ -34,45 +34,47 @@ def finding_city(postcode):
         
 #        print("You'll get all important information on", city+ ",", state)
         
-        results = [city, state, longitude, latitude]
+#        results = [city, state, longitude, latitude]
+    
+
+    endpoint = "http://api.openweathermap.org/data/2.5/weather"
+    
+    #Doesn't work with city cause there are several cities with the same name in the world and by default it will take the largest city. 
+    #payload = {"q": (city_string (+',uk' )), "units":"metric", "appid": config.api_key_weather}
+    payload = {"lat": latitude, "lon": longitude, "units":"metric", "appid": config.api_key_weather}
+    
+    
+    response = requests.get(endpoint, params=payload)
+    data = response.json()
+    
+##-------------------------------------------------------------------------#
+#
+#
+##-------------------------------------------------------------------------#
+    ##2nd API: USING CITY FROM ABOVE TO GET WEATHER INFO 
+    temperature = data['main']['temp']
+    name = data['name']
+    weather = data['weather'][0]['main']
+
+    results = [city, state, longitude, latitude, temperature, name, weather]
     return results
 
-#results = finding_city(postcode)
 
-#print(results)
-#endpoint = "http://api.openweathermap.org/data/2.5/weather"
-#
-##Doesn't work with city cause there are several cities with the same name in the world and by default it will take the largest city. 
-##payload = {"q": (city_string (+',uk' )), "units":"metric", "appid": config.api_key_weather}
-#payload = {"lat": latitude, "lon": longitude, "units":"metric", "appid": config.api_key_weather}
-#
-#
-#response = requests.get(endpoint, params=payload)
-#data = response.json()
-#
-##-------------------------------------------------------------------------#
-#
-#
-##-------------------------------------------------------------------------#
-###2nd API: USING CITY FROM ABOVE TO GET WEATHER INFO 
-#temperature = data['main']['temp']
-#name = data['name']
-#weather = data['weather'][0]['main']
-#print('TEMPERATURE', temperature)
-#print('WEATHER', weather)
-#
 #print('It is {}C in {}, {}, and the sky is {}'.format(temperature, name,  state, weather))
-#
-#
-#def userSuggestion():
-#    if temperature < 10:
-#        print("It's cold today, take your big coat!")
-#    elif temperature < 20:
-#        print("Light jacket should do today.")
-#    else:
-#        print("It's getting hot in here - take your swimsuit!")
-#        
-#userSuggestion()
+
+
+
+def userSuggestion(results):
+    if results[4] < 10:
+        statement = "It's cold today, take your big coat!"
+    elif results[4] < 20:
+        statement = "Light jacket should do today."
+    else:
+        statement ="It's getting hot in here - take your swimsuit!"
+        
+    return statement
+        
+
 ##        
 ##-------------------------------------------------------------------------#
 #
@@ -91,20 +93,25 @@ def finding_city(postcode):
 ##print(response.url)
 #
 ##-------------------------------------------------------------------------#
-##4th API: CRIME
-#endpoint = "https://data.police.uk/api/crimes-street/all-crime"
-#payload = {'lat': latitude, 'lng': longitude}
-#
-#response = requests.get(endpoint, params=payload)
-#data = response.json()
-#
-##print(response.url)
-#crime = (data[0]['category'])
-#crime_location = (data[0]['location']['street']['name'])
-#
-#print('The latest crime in your area was a {} and it took place {}'.format(crime, crime_location))
-#
-#
+#4th API: CRIME
+    
+def crimeAPI(results):
+    
+    endpoint = "https://data.police.uk/api/crimes-street/all-crime"
+    payload = {'lat': results[3], 'lng': results[2]}
+
+    response = requests.get(endpoint, params=payload)
+    data = response.json()
+
+    print(response.url)
+    crime = (data[0]['category'])
+    crime_location = (data[0]['location']['street']['name'])
+
+    crime_statement = 'The latest crime in your area was a {} and it took place {}'.format(crime, crime_location)
+
+    return crime_statement
+
+
 #
 #
 #
