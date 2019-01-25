@@ -4,12 +4,12 @@ Created on Fri Jan 25 10:42:31 2019
 
 @author: Katharina
 """
-import requests
+
 import config
 #-------------------------------------------------------------------------#
 #1st API: GETTING CITY TO CORREPONDING POSTCODE 
 def finding_city(postcode):
-    
+    import requests
 #    postcode = input('Which city would you like to search in the UK? Please type in the postcode ')
     
     endpoint = "https://api.postcodes.io/postcodes/"
