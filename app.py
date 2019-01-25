@@ -5,6 +5,7 @@ Created on Mon Jan 21 09:27:16 2019
 @author: Katharina
 """
 from flask import Flask, render_template, request
+from weatherAPI_functions import *
 
 app = Flask(__name__)
 
@@ -24,7 +25,8 @@ def generate():
 def confirmation():
     formdata = request.form
     postcode = formdata['postcode']
-    result = 'If postcode is okay, this will show.'
+#    result = 'If postcode is okay, this will show.'
+    postcode = finding_city(postcode)
     return render_template("confirmation.html", **locals())
 
 
